@@ -3,7 +3,12 @@ export default {
   content: ["./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#3B82F6', // Color azul de Tailwind
+        'primary-dark': '#2563EB',
+      },
+    },
   },
   plugins: [],
 }

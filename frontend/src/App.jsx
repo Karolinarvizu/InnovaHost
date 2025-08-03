@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Frontend from './componentes/Frontend';
 import Home from './paginas/Home';
@@ -17,8 +19,10 @@ import RutaProtegida from './componentes/RutaProtegida';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <>
+      <ToastContainer position="top-right" autoClose={5000} />
+      <BrowserRouter>
+        <Routes>
         <Route path="/" element={<Frontend />}>
           <Route index element={<Home />} />
           <Route path="login" element={<AccesoLogin />} />
@@ -36,6 +40,9 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
+
+
 export default App;

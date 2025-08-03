@@ -9,6 +9,13 @@ class HotelController extends Controller
 {
     public function index()
     {
-        return response()->json(Hotel::all());
+        $hoteles = Hotel::with(['habitaciones', 'servicios'])->get();
+        return response()->json($hoteles);
+    }
+
+    public function show($id)
+    {
+        $hotel = Hotel::with(['habitaciones', 'servicios'])->findOrFail($id);
+        return response()->json($hotel);
     }
 }

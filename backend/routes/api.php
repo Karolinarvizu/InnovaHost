@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReservacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,26 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+// Rutas de reservaciones
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/reservaciones', [ReservacionController::class, 'store']);
+    Route::get('/reservaciones', [ReservacionController::class, 'index']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Rutas públicas de hoteles
+Route::get('/hoteles', [HotelController::class, 'index']);
+Route::get('/hoteles/{id}', [HotelController::class, 'show']);
 
+// Rutas protegidas de hoteles (requieren autenticación)
+Route::middleware('auth:api')->group(function () {
+    Route::post('/hoteles', [HotelController::class, 'store']);
+    Route::put('/hoteles/{id}', [HotelController::class, 'update']);
+    Route::delete('/hoteles/{id}', [HotelController::class, 'destroy']);
+});
 
 Route::group([
     'middleware' => 'api',
